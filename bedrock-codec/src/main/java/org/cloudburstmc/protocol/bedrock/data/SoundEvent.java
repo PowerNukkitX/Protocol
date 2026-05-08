@@ -1021,16 +1021,24 @@ public enum SoundEvent {
      */
     BOUNCE,
     /**
-     * @since v986
+     * @since v990
      */
     SLIME_LANDING,
     /**
-     * @since v986
+     * @since v990
      */
     ABSORB_BLOCK,
     /**
-     * @since v986
+     * @since v990
      */
     EJECT_BLOCK,
+    /**
+     * @since v990
+     */
+    GEYSER_ERUPTION_START,
+    /**
+     * @since v990
+     */
+    GEYSER_ERUPTION_ACTIVE,
     UNDEFINED
 }

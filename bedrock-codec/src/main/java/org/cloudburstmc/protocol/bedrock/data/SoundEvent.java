@@ -1021,24 +1021,44 @@ public enum SoundEvent {
      */
     BOUNCE,
     /**
-     * @since v990
+     * @since v1001
      */
     SLIME_LANDING,
     /**
-     * @since v990
+     * @since v1001
      */
     ABSORB_BLOCK,
     /**
-     * @since v990
+     * @since v1001
      */
     EJECT_BLOCK,
     /**
-     * @since v990
+     * @since v1001
      */
     GEYSER_ERUPTION_START,
     /**
-     * @since v990
+     * @since v1001
      */
     GEYSER_ERUPTION_ACTIVE,
+    /**
+     * @since v1001
+     */
+    RECORD_BOUNCE,
+    /**
+     * @since v1001
+     */
+    BUCKET_FILL_LAND_ANIMAL,
+    /**
+     * @since v1001
+     */
+    BUCKET_EMPTY_LAND_ANIMAL,
+    /**
+     * @since v1001
+     */
+    GEYSER_CONTINUOUS_ERUPTION_START,
+    /**
+     * @since v1001
+     */
+    GEYSER_CONTINUOUS_ERUPTION_ACTIVE,
     UNDEFINED
 }

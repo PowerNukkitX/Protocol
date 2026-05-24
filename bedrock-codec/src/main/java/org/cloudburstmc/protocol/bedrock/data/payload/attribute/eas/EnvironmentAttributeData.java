@@ -10,18 +10,18 @@ import org.cloudburstmc.protocol.bedrock.data.camera.EasingType;
 public class EnvironmentAttributeData {
 
     private String attributeName;
-    private AttributeData fromAttribute;
-    private AttributeData attribute;
-    private AttributeData toAttribute;
+    private EASAttributeData fromAttribute;
+    private EASAttributeData attribute;
+    private EASAttributeData toAttribute;
     private int currentTransitionTicks;
     private int totalTransitionTicks;
     private EasingType easing;
     /**
-     * @since v990
+     * @since v1001
      */
     private int localTransitionTicks;
     /**
-     * @since v990
+     * @since v1001
      */
     private boolean noiseTransition;
 }

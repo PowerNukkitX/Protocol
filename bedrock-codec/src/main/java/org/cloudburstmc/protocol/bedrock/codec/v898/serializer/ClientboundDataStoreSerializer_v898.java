@@ -79,13 +79,12 @@ public class ClientboundDataStoreSerializer_v898 implements BedrockPacketSeriali
                 helper.writeString(buffer, (String) value.getValue());
                 break;
             case TYPE:
-                @SuppressWarnings("unchecked")
                 final Map<String, DataStorePropertyValue> map = (Map<String, DataStorePropertyValue>) value.getValue();
                 VarInts.writeUnsignedInt(buffer, map.size());
                 for (Map.Entry<String, DataStorePropertyValue> entry : map.entrySet()) {
                     helper.writeString(buffer, entry.getKey());
                     buffer.writeIntLE(entry.getValue().getType().getId());
-                    writeTheNewPropertyValue(buffer, helper, entry.getValue());
+                    this.writeTheNewPropertyValue(buffer, helper, entry.getValue());
                 }
                 break;
         }

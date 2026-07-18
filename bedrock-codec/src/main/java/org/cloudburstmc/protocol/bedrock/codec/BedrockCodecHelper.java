@@ -5,7 +5,9 @@ import org.cloudburstmc.math.vector.Vector2f;
 import org.cloudburstmc.math.vector.Vector3f;
 import org.cloudburstmc.math.vector.Vector3i;
 import org.cloudburstmc.nbt.NbtType;
-import org.cloudburstmc.protocol.bedrock.data.*;
+import org.cloudburstmc.protocol.bedrock.data.EncodingSettings;
+import org.cloudburstmc.protocol.bedrock.data.GameRuleData;
+import org.cloudburstmc.protocol.bedrock.data.ServerSoundHandle;
 import org.cloudburstmc.protocol.bedrock.data.actor.ActorDataMap;
 import org.cloudburstmc.protocol.bedrock.data.actor.ActorLink;
 import org.cloudburstmc.protocol.bedrock.data.actor.PropertySyncData;
@@ -14,23 +16,29 @@ import org.cloudburstmc.protocol.bedrock.data.command.CommandOriginData;
 import org.cloudburstmc.protocol.bedrock.data.ddui.DataStoreUpdate;
 import org.cloudburstmc.protocol.bedrock.data.definitions.BlockDefinition;
 import org.cloudburstmc.protocol.bedrock.data.definitions.ItemDefinition;
+import org.cloudburstmc.protocol.bedrock.data.gathering.GatheringsConfig;
 import org.cloudburstmc.protocol.bedrock.data.inventory.ContainerEnumName;
 import org.cloudburstmc.protocol.bedrock.data.inventory.FullContainerName;
 import org.cloudburstmc.protocol.bedrock.data.inventory.ItemData;
-import org.cloudburstmc.protocol.bedrock.data.inventory.descriptor.ItemDescriptorWithCount;
+import org.cloudburstmc.protocol.bedrock.data.inventory.descriptor.RecipeIngredient;
 import org.cloudburstmc.protocol.bedrock.data.inventory.itemstack.request.ItemStackRequest;
 import org.cloudburstmc.protocol.bedrock.data.inventory.itemstack.response.ItemStackResponseContainerInfo;
 import org.cloudburstmc.protocol.bedrock.data.payload.abilities.SerializedAbilitiesData;
+import org.cloudburstmc.protocol.bedrock.data.payload.common.RedactableString;
+import org.cloudburstmc.protocol.bedrock.data.payload.configuration.PresenceConfiguration;
+import org.cloudburstmc.protocol.bedrock.data.payload.experiment.ExperimentToggle;
+import org.cloudburstmc.protocol.bedrock.data.payload.experiment.Experiments;
 import org.cloudburstmc.protocol.bedrock.data.payload.inventory.transaction.InventoryTransaction;
-import org.cloudburstmc.protocol.bedrock.data.skin.SerializedSkin;
-import org.cloudburstmc.protocol.bedrock.data.structure.StructureSettings;
+import org.cloudburstmc.protocol.bedrock.data.payload.inventory.transaction.data.ItemUseInventoryTransaction;
+import org.cloudburstmc.protocol.bedrock.data.payload.skin.SerializedSkin;
+import org.cloudburstmc.protocol.bedrock.data.payload.structure.StructureSettings;
+import org.cloudburstmc.protocol.bedrock.data.skin.Skin;
 import org.cloudburstmc.protocol.common.DefinitionRegistry;
 import org.cloudburstmc.protocol.common.NamedDefinition;
 import org.cloudburstmc.protocol.common.util.TriConsumer;
 import org.cloudburstmc.protocol.common.util.VarInts;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.function.*;
@@ -135,9 +143,9 @@ public interface BedrockCodecHelper {
 
     void writeStructureSettings(ByteBuf buffer, StructureSettings settings);
 
-    SerializedSkin readSkin(ByteBuf buffer);
+    Skin readSkin(ByteBuf buffer);
 
-    void writeSkin(ByteBuf buffer, SerializedSkin skin);
+    void writeSkin(ByteBuf buffer, Skin skin);
 
     byte[] readByteArray(ByteBuf buffer);
 
@@ -201,10 +209,6 @@ public interface BedrockCodecHelper {
 
     void writeInventoryTransactions(ByteBuf buffer, InventoryTransaction actions);
 
-    void readExperiments(ByteBuf buffer, List<Experiment> experiments);
-
-    void writeExperiments(ByteBuf buffer, List<Experiment> experiments);
-
     ItemStackRequest readItemStackRequest(ByteBuf buffer);
 
     void writeItemStackRequest(ByteBuf buffer, ItemStackRequest request);
@@ -225,13 +229,13 @@ public interface BedrockCodecHelper {
 
     void writeEntityProperties(ByteBuf buffer, PropertySyncData properties);
 
-    ItemDescriptorWithCount readIngredient(ByteBuf buffer);
+    RecipeIngredient readIngredient(ByteBuf buffer);
 
-    void writeIngredient(ByteBuf buffer, ItemDescriptorWithCount ingredient);
+    void writeIngredient(ByteBuf buffer, RecipeIngredient ingredient);
 
-    void writeContainerSlotType(ByteBuf buffer, ContainerEnumName slotType);
+    void writeContainerEnumName(ByteBuf buffer, ContainerEnumName slotType);
 
-    ContainerEnumName readContainerSlotType(ByteBuf buffer);
+    ContainerEnumName readContainerEnumName(ByteBuf buffer);
 
     void writeSerializedAbilitiesData(ByteBuf buffer, SerializedAbilitiesData data);
 
@@ -260,4 +264,36 @@ public interface BedrockCodecHelper {
     void writeServerSoundHandle(ByteBuf buffer, ServerSoundHandle serverSoundHandle);
 
     ServerSoundHandle readServerSoundHandle(ByteBuf buffer);
+
+    void writeGatheringsConfig(ByteBuf buffer, GatheringsConfig config);
+
+    GatheringsConfig readGatheringsConfig(ByteBuf buffer);
+
+    void writePresenceConfiguration(ByteBuf buffer, PresenceConfiguration config);
+
+    PresenceConfiguration readPresenceConfiguration(ByteBuf buffer);
+
+    void writeNetworkItemInstanceDescriptor(ByteBuf buffer, ItemData item);
+
+    ItemData readNetworkItemInstanceDescriptor(ByteBuf buffer);
+
+    void writeRedactableString(ByteBuf buffer, RedactableString string);
+
+    RedactableString readRedactableString(ByteBuf buffer);
+
+    void writeExperiments(ByteBuf buffer, Experiments experiments);
+
+    Experiments readExperiments(ByteBuf buffer);
+
+    void writeExperimentToggle(ByteBuf buffer, ExperimentToggle toggle);
+
+    ExperimentToggle readExperimentToggle(ByteBuf buffer);
+
+    void writeItemUseInventoryTransaction(ByteBuf buffer, ItemUseInventoryTransaction transaction);
+
+    ItemUseInventoryTransaction readItemUseInventoryTransaction(ByteBuf buffer);
+
+    void writeSerializedSkin(ByteBuf buffer, SerializedSkin serializedSkin);
+
+    SerializedSkin readSerializedSkin(ByteBuf buffer);
 }

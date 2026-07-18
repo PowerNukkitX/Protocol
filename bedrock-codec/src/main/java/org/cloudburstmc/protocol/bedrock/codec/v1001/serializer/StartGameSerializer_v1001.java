@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import org.cloudburstmc.protocol.bedrock.codec.BedrockCodecHelper;
 import org.cloudburstmc.protocol.bedrock.codec.v944.serializer.StartGameSerializer_v944;
 import org.cloudburstmc.protocol.bedrock.data.LevelSettings;
-import org.cloudburstmc.protocol.bedrock.data.payload.configuration.PresenceConfiguration;
+import org.cloudburstmc.protocol.bedrock.data.payload.editor.ServerEditorConnectionPolicy;
 import org.cloudburstmc.protocol.bedrock.packet.StartGamePacket;
 import org.cloudburstmc.protocol.common.util.VarInts;
 
@@ -20,31 +20,15 @@ public class StartGameSerializer_v1001 extends StartGameSerializer_v944 {
     @Override
     protected void writeLevelSettings(ByteBuf buffer, BedrockCodecHelper helper, LevelSettings settings) {
         super.writeLevelSettings(buffer, helper, settings);
-        VarInts.writeInt(buffer, settings.getServerEditorConnectionPolicy());
+        VarInts.writeInt(buffer, settings.getServerEditorConnectionPolicy().ordinal());
         buffer.writeBoolean(settings.isAllowAnonymousBlockDropsInEditorWorlds());
     }
 
     @Override
     protected void readLevelSettings(ByteBuf buffer, BedrockCodecHelper helper, LevelSettings settings) {
         super.readLevelSettings(buffer, helper, settings);
-        settings.setServerEditorConnectionPolicy(VarInts.readInt(buffer));
+        settings.setServerEditorConnectionPolicy(ServerEditorConnectionPolicy.from(VarInts.readInt(buffer)));
         settings.setAllowAnonymousBlockDropsInEditorWorlds(buffer.readBoolean());
-    }
-
-    @Override
-    protected void writePresenceInfo(ByteBuf buffer, BedrockCodecHelper helper, PresenceConfiguration configuration) {
-        helper.writeOptionalNull(buffer, configuration.getExperienceName(), helper::writeString);
-        helper.writeOptionalNull(buffer, configuration.getWorldName(), helper::writeString);
-        helper.writeString(buffer, configuration.getRichPresenceId());
-    }
-
-    @Override
-    protected PresenceConfiguration readPresenceInfo(ByteBuf buffer, BedrockCodecHelper helper) {
-        final PresenceConfiguration configuration = new PresenceConfiguration();
-        configuration.setExperienceName(helper.readOptional(buffer, null, helper::readString));
-        configuration.setWorldName(helper.readOptional(buffer, null, helper::readString));
-        configuration.setRichPresenceId(helper.readString(buffer));
-        return configuration;
     }
 
     @Override

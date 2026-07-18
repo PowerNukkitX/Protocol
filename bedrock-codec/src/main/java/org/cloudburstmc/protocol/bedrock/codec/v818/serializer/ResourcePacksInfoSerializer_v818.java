@@ -15,9 +15,8 @@ public class ResourcePacksInfoSerializer_v818 extends ResourcePacksInfoSerialize
         buffer.writeBoolean(packet.isHasAddonPacks());
         buffer.writeBoolean(packet.isHasScripts());
         buffer.writeBoolean(packet.isForceDisableVibrantVisuals());
-        helper.writeUuid(buffer, packet.getWorldTemplateUUID());
-        helper.writeString(buffer, packet.getWorldTemplateVersion());
-        writePacks(buffer, packet.getResourcePacks(), helper, true);
+        this.writePackIdVersion(buffer, helper, packet.getWorldTemplateIdAndVersion());
+        helper.writeArray(buffer, packet.getResourcePacks(), ByteBuf::writeShortLE, this::writePackInfoData);
     }
 
     @Override
@@ -26,8 +25,7 @@ public class ResourcePacksInfoSerializer_v818 extends ResourcePacksInfoSerialize
         packet.setHasAddonPacks(buffer.readBoolean());
         packet.setHasScripts(buffer.readBoolean());
         packet.setForceDisableVibrantVisuals(buffer.readBoolean());
-        packet.setWorldTemplateUUID(helper.readUuid(buffer));
-        packet.setWorldTemplateVersion(helper.readString(buffer));
-        readPacks(buffer, packet.getResourcePacks(), helper, true);
+        packet.setWorldTemplateIdAndVersion(this.readPackIdVersion(buffer, helper));
+        helper.readArray(buffer, packet.getResourcePacks(), ByteBuf::readShortLE, this::readPackInfoData);
     }
 }

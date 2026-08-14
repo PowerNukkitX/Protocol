@@ -19,25 +19,35 @@ public class SetScoreboardIdentitySerializer_v2168 extends SetScoreboardIdentity
 
     @Override
     public void serialize(ByteBuf buffer, BedrockCodecHelper helper, SetScoreboardIdentityPacket packet) {
-        buffer.writeByte(packet.getScoreboardIdentityPacketType().ordinal());
-        helper.writeArray(buffer, packet.getScoreboardIdentityInfo(), this::writeScoreboardIdentityPacketInfo);
+        final ScoreboardIdentityPacketType packetType = packet.getScoreboardIdentityPacketType();
+        buffer.writeByte(packetType.ordinal());
+        helper.writeArray(buffer, packet.getScoreboardIdentityInfo(), (buf, codecHelper, info) ->
+                this.writeScoreboardIdentityPacketInfo(buf, codecHelper, info, packetType));
     }
 
     @Override
     public void deserialize(ByteBuf buffer, BedrockCodecHelper helper, SetScoreboardIdentityPacket packet) {
-        packet.setScoreboardIdentityPacketType(ScoreboardIdentityPacketType.from(buffer.readUnsignedByte()));
-        helper.readArray(buffer, packet.getScoreboardIdentityInfo(), this::readScoreboardIdentityPacketInfo);
+        final ScoreboardIdentityPacketType packetType = ScoreboardIdentityPacketType.from(buffer.readUnsignedByte());
+        packet.setScoreboardIdentityPacketType(packetType);
+        helper.readArray(buffer, packet.getScoreboardIdentityInfo(), (buf, codecHelper) ->
+                this.readScoreboardIdentityPacketInfo(buf, codecHelper, packetType));
     }
 
-    protected void writeScoreboardIdentityPacketInfo(ByteBuf buffer, BedrockCodecHelper helper, ScoreboardIdentityPacketInfo info) {
+    protected void writeScoreboardIdentityPacketInfo(ByteBuf buffer, BedrockCodecHelper helper, ScoreboardIdentityPacketInfo info,
+                                                    ScoreboardIdentityPacketType packetType) {
         VarInts.writeLong(buffer, info.getScoreboardId());
-        VarInts.writeLong(buffer, info.getPlayerUniqueId());
+        if (packetType == ScoreboardIdentityPacketType.UPDATE) {
+            VarInts.writeLong(buffer, info.getPlayerUniqueId());
+        }
     }
 
-    protected ScoreboardIdentityPacketInfo readScoreboardIdentityPacketInfo(ByteBuf buffer, BedrockCodecHelper helper) {
+    protected ScoreboardIdentityPacketInfo readScoreboardIdentityPacketInfo(ByteBuf buffer, BedrockCodecHelper helper,
+                                                                           ScoreboardIdentityPacketType packetType) {
         final ScoreboardIdentityPacketInfo info = new ScoreboardIdentityPacketInfo();
         info.setScoreboardId(VarInts.readLong(buffer));
-        info.setPlayerUniqueId(VarInts.readLong(buffer));
+        if (packetType == ScoreboardIdentityPacketType.UPDATE) {
+            info.setPlayerUniqueId(VarInts.readLong(buffer));
+        }
         return info;
     }
 }

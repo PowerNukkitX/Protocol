@@ -17,7 +17,7 @@ public class CameraInstructionSerializer_v827 extends CameraInstructionSerialize
         helper.writeOptionalNull(buffer, packet.getFovInstruction(), (buf, fovInstruction) -> {
             buf.writeFloatLE(fovInstruction.getFov());
             buf.writeFloatLE(fovInstruction.getEaseTime());
-            buf.writeByte(fovInstruction.getEaseType().ordinal());
+            helper.writeString(buf, fovInstruction.getEaseType().getSerializeName());
             buf.writeBoolean(fovInstruction.isClear());
         });
     }
@@ -28,7 +28,7 @@ public class CameraInstructionSerializer_v827 extends CameraInstructionSerialize
         packet.setFovInstruction(helper.readOptional(buffer, null, buf -> {
             float fow = buf.readFloatLE();
             float easeTime = buf.readFloatLE();
-            EasingType easeType = EasingType.values()[buf.readUnsignedByte()];
+            EasingType easeType = EasingType.fromName(helper.readString(buf));
             boolean fovClear = buf.readBoolean();
             return new CameraFovInstruction(fow, easeTime, easeType, fovClear);
         }));

@@ -206,7 +206,7 @@ public class BedrockCodecHelper_v2168 extends BedrockCodecHelper_v1001 {
                         item.getCanBreak(),
                         item.getBlockingTicks()
                 ),
-                definition.getIdentifier().equals(BLOCKING_ID)
+                definition != null && definition.getIdentifier().equals(BLOCKING_ID)
         );
     }
 
@@ -225,7 +225,7 @@ public class BedrockCodecHelper_v2168 extends BedrockCodecHelper_v1001 {
 
         int blockRuntimeId = VarInts.readUnsignedInt(buffer);
 
-        final UserDataBuffer userDataBuffer = this.readUserDataBuffer(buffer, definition.getIdentifier().equals(BLOCKING_ID));
+        final UserDataBuffer userDataBuffer = this.readUserDataBuffer(buffer, definition != null && definition.getIdentifier().equals(BLOCKING_ID));
         return ItemData.builder()
                 .definition(definition)
                 .damage(damage)
@@ -258,7 +258,7 @@ public class BedrockCodecHelper_v2168 extends BedrockCodecHelper_v1001 {
                         item.getCanBreak(),
                         item.getBlockingTicks()
                 ),
-                definition.getIdentifier().equals(BLOCKING_ID)
+                definition != null && definition.getIdentifier().equals(BLOCKING_ID)
         );
     }
 
@@ -269,7 +269,7 @@ public class BedrockCodecHelper_v2168 extends BedrockCodecHelper_v1001 {
         int count = buffer.readUnsignedShortLE();
         int damage = VarInts.readUnsignedInt(buffer);
         int blockRuntimeId = VarInts.readInt(buffer);
-        final UserDataBuffer userDataBuffer = this.readUserDataBuffer(buffer, definition.getIdentifier().equals(BLOCKING_ID));
+        final UserDataBuffer userDataBuffer = this.readUserDataBuffer(buffer, definition != null && definition.getIdentifier().equals(BLOCKING_ID));
         return ItemData.builder()
                 .definition(definition)
                 .damage(damage)
@@ -864,14 +864,14 @@ public class BedrockCodecHelper_v2168 extends BedrockCodecHelper_v1001 {
     protected void writeItemStackRequestMineBlockAction(ByteBuf buffer, MineBlockAction action) {
         VarInts.writeInt(buffer, action.getSlot());
         VarInts.writeInt(buffer, action.getPredictedDurability());
-        VarInts.writeInt(buffer, action.getStackNetworkId());
+        buffer.writeIntLE(action.getStackNetworkId());
     }
 
     protected MineBlockAction readItemStackRequestMineBlockAction(ByteBuf buffer) {
         return new MineBlockAction(
                 VarInts.readInt(buffer),
                 VarInts.readInt(buffer),
-                VarInts.readInt(buffer)
+                buffer.readIntLE()
         );
     }
 
@@ -926,14 +926,14 @@ public class BedrockCodecHelper_v2168 extends BedrockCodecHelper_v1001 {
     }
 
     protected void writeItemStackRequestCraftRepairAndDisenchantAction(ByteBuf buffer, CraftGrindstoneAction action) {
-        VarInts.writeUnsignedInt(buffer, action.getRecipeNetId().getRawId());
+        buffer.writeIntLE(action.getRecipeNetId().getRawId());
         buffer.writeByte(action.getNumberOfRequestedCrafts());
         VarInts.writeInt(buffer, action.getRepairCost());
     }
 
     protected CraftGrindstoneAction readItemStackRequestCraftRepairAndDisenchantAction(ByteBuf buffer) {
         return new CraftGrindstoneAction(
-                new RecipeNetId(VarInts.readUnsignedInt(buffer)),
+                new RecipeNetId(buffer.readIntLE()),
                 buffer.readUnsignedByte(),
                 VarInts.readInt(buffer)
         );
@@ -1006,7 +1006,7 @@ public class BedrockCodecHelper_v2168 extends BedrockCodecHelper_v1001 {
         serializedSkin.setImageData(this.readSkinImage(buffer));
         this.readArray(buffer, serializedSkin.getAnimatedImageData(), this::readAnimatedImageData);
         serializedSkin.setCapeImageData(this.readSkinImage(buffer));
-        serializedSkin.setGeometryData(this.readString(buffer));
+        serializedSkin.setGeometryData(this.readStringMaxLen(buffer, this.encodingSettings.maxGeometryDataSize()));
         serializedSkin.setGeometryDataMinEngineVersion(this.readString(buffer));
         serializedSkin.setAnimationData(this.readString(buffer));
         serializedSkin.setCapeID(this.readString(buffer));

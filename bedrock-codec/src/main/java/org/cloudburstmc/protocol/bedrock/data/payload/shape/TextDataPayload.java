@@ -21,6 +21,10 @@ public class TextDataPayload implements ExtraShapeDataPayload {
      */
     private Integer backgroundColor;
     /**
+     * @since v2181
+     */
+    private float lineGapHeight;
+    /**
      * @since v975
      */
     private boolean depthTest;

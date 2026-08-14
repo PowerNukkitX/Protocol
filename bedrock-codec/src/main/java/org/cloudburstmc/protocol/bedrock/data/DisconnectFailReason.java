@@ -241,5 +241,9 @@ public enum DisconnectFailReason {
     /**
      * @since v2168
      */
-    EDITOR_NOT_ALLOWED
+    EDITOR_NOT_ALLOWED,
+    /**
+     * @since v2181
+     */
+    MISSING_STRUCTURE_DATA
 }

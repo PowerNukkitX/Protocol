@@ -139,7 +139,6 @@ public class Bedrock_v924 extends Bedrock_v898 {
             .build();
 
     public static final BedrockCodec CODEC = Bedrock_v898.CODEC.toBuilder()
-            .raknetProtocolVersion(11)
             .protocolVersion(924)
             .minecraftVersion("1.26.0")
             .helper(() -> new BedrockCodecHelper_v924(ACTOR_DATA, GAME_RULE_TYPES, ITEM_STACK_REQUEST_TYPES, CONTAINER_SLOT_TYPES, PLAYER_ABILITIES, TEXT_PROCESSING_ORIGINS))
@@ -148,7 +147,7 @@ public class Bedrock_v924 extends Bedrock_v898 {
             .updateSerializer(CameraAimAssistPresetsPacket.class, CameraAimAssistPresetsSerializer_v924.INSTANCE)
             .updateSerializer(CameraInstructionPacket.class, CameraInstructionSerializer_v924.INSTANCE)
             .updateSerializer(PrimitiveShapesPacket.class, PrimitiveShapesSerializer_v924.INSTANCE)
-            .updateSerializer(GraphicsOverrideParameterPacket.class, GraphicsParameterOverrideSerializer_v924.INSTANCE)
+            .updateSerializer(GraphicsOverrideParameterPacket.class, GraphicsOverrideParameterSerializer_v924.INSTANCE)
             .updateSerializer(LevelSoundEventPacket.class, new LevelSoundEventSerializer_v786(SOUND_EVENTS))
             .updateSerializer(ServerboundDiagnosticsPacket.class, new ServerboundDiagnosticsSerializer_v924(MEMORY_CATEGORY_TYPES))
             .updateSerializer(StartGamePacket.class, StartGameSerializer_v924.INSTANCE)

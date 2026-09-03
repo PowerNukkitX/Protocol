@@ -20,9 +20,17 @@ public class PlaySoundPacket implements BedrockPacket {
      */
     private int loopCount;
     /**
+     * @since v2192
+     */
+    private boolean bypassListenerRangeCheck;
+    /**
      * @since v975
      */
     private ServerSoundHandle serverSoundHandle;
+    /**
+     * @since v2192
+     */
+    private Float playbackPositionSeconds;
 
     @Override
     public final PacketSignal handle(BedrockPacketHandler handler) {

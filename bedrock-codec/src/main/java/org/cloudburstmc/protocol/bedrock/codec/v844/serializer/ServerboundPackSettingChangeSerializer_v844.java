@@ -17,10 +17,10 @@ public class ServerboundPackSettingChangeSerializer_v844 implements BedrockPacke
         helper.writeUuid(buffer, packet.getPackId());
         helper.writeString(buffer, packet.getPackSettingName());
 
-        VarInts.writeUnsignedInt(buffer, packet.getPackSettingDataType().ordinal());
+        VarInts.writeUnsignedInt(buffer, packet.getPackSettingValueType().ordinal());
 
         final Object value = packet.getPackSettingValue();
-        switch (packet.getPackSettingDataType()) {
+        switch (packet.getPackSettingValueType()) {
             case FLOAT:
                 buffer.writeFloatLE((float) value);
                 break;
@@ -36,10 +36,10 @@ public class ServerboundPackSettingChangeSerializer_v844 implements BedrockPacke
     @Override
     public void deserialize(ByteBuf buffer, BedrockCodecHelper helper, ServerboundPackSettingChangePacket packet) {
         packet.setPackId(helper.readUuid(buffer));
-        packet.setPackSettingName(helper.readString(buffer));
-        packet.setPackSettingDataType(ServerboundPackSettingChangePacket.Type.from(VarInts.readUnsignedInt(buffer)));
+        packet.setPackSettingName(helper.readStringMaxLen(buffer, 128));
+        packet.setPackSettingValueType(ServerboundPackSettingChangePacket.Type.from(VarInts.readUnsignedInt(buffer)));
 
-        switch (packet.getPackSettingDataType()) {
+        switch (packet.getPackSettingValueType()) {
             case FLOAT:
                 packet.setPackSettingValue(buffer.readFloatLE());
                 break;

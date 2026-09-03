@@ -29,7 +29,12 @@ public class TextSerializer_v924 extends TextSerializer_v898 {
         this.writeMessageBody(buffer, helper, body);
         helper.writeString(buffer, packet.getSendersXUID());
         helper.writeString(buffer, packet.getPlatformId());
-        helper.writeString(buffer, packet.getFilteredMessage());
+        helper.writeOptional(
+                buffer,
+                o -> !packet.getFilteredMessage().isEmpty(),
+                packet.getFilteredMessage(),
+                helper::writeString
+        );
     }
 
     @Override
@@ -40,8 +45,8 @@ public class TextSerializer_v924 extends TextSerializer_v898 {
         final TextPacketType messageType = TextPacketType.from(buffer.readUnsignedByte());
         packet.setMessageType(messageType);
         packet.setBody(this.readMessageBody(buffer, helper, bodyType));
-        packet.setSendersXUID(helper.readString(buffer));
-        packet.setPlatformId(helper.readString(buffer));
-        packet.setFilteredMessage(helper.readString(buffer));
+        packet.setSendersXUID(helper.readStringMaxLen(buffer, 64));
+        packet.setPlatformId(helper.readStringMaxLen(buffer, 256));
+        packet.setFilteredMessage(helper.readOptional(buffer, "", helper::readString));
     }
 }

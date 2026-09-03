@@ -20,4 +20,16 @@ public class DimensionDefinition {
      * @since v2168
      */
     UUID packId;
+    /**
+     * @since v2192
+     */
+    String defaultBiome;
+    /**
+     * @since v2207
+     */
+    int cloudHeight;
+    /**
+     * @since v2207
+     */
+    boolean renderClouds;
 }

@@ -405,15 +405,14 @@ public class ActorDataTypes {
     public static final ActorDataType<Integer> DATA_DURATION = new ActorDataType<>(Integer.class, "DATA_DURATION");
     /**
      * Used for Area Effect Cloud spawn time.
+     *
+     * @deprecated since v685
      */
     @Deprecated
     public static final ActorDataType<Integer> DATA_SPAWN_TIME_DEPRECATED = new ActorDataType<>(Integer.class, "DATA_SPAWN_TIME_deprecated");
     /**
      * Used for Area Effect Cloud change rate.
-     *
-     * @deprecated since v685
      */
-    @Deprecated
     public static final ActorDataType<Float> DATA_CHANGE_RATE = new ActorDataType<>(Float.class, "DATA_CHANGE_RATE");
     /**
      * Used for Area Effect Cloud change on pickup.

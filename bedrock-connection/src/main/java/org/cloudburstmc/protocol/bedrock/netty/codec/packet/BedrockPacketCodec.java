@@ -26,6 +26,19 @@ public abstract class BedrockPacketCodec extends MessageToMessageCodec<ByteBuf, 
 
     private final boolean shouldLogEncodingErrors;
 
+    /**
+     * Bytes reserved ahead of an encoded packet so the batch encoder can write its length prefix
+     * in place instead of prepending a separate buffer. Matches the largest unsigned VarInt.
+     */
+    public static final byte MAX_LENGTH_PREFIX_BYTES = 5;
+
+    /**
+     * Initial encode buffer size, reservation included. Sits exactly on a pooled size class so the
+     * reservation is free: asking for 128 plus the prefix rounds up to the next class (160) and grows
+     * every encode buffer by a quarter to buy five bytes.
+     */
+    private static final int INITIAL_BUFFER_SIZE = 128;
+
     private BedrockCodec codec = BedrockCompat.CODEC;
     private BedrockCodecHelper helper = codec.createHelper();
 
@@ -45,14 +58,19 @@ public abstract class BedrockPacketCodec extends MessageToMessageCodec<ByteBuf, 
             // We have a pre-encoded packet buffer, just use that.
             out.add(msg.retain());
         } else {
-            ByteBuf buf = ctx.alloc().buffer(128);
+            ByteBuf buf = ctx.alloc().buffer(INITIAL_BUFFER_SIZE);
             try {
+                // Leave room for the batch length prefix ahead of the packet, so batching can write
+                // it in place. The reserved bytes sit before the reader index and are never read.
+                buf.setIndex(MAX_LENGTH_PREFIX_BYTES, MAX_LENGTH_PREFIX_BYTES);
+
                 BedrockPacket packet = msg.getPacket();
                 msg.setPacketId(getPacketId(packet));
                 encodeHeader(buf, msg);
                 this.codec.tryEncode(helper, buf, packet);
 
                 msg.setPacketBuffer(buf.retain());
+                msg.setReservedPrefixBytes(MAX_LENGTH_PREFIX_BYTES);
                 out.add(msg.retain());
             } catch (Throwable t) {
                 if (this.shouldLogEncodingErrors) {

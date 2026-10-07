@@ -1,6 +1,7 @@
 package org.cloudburstmc.protocol.bedrock.util;
 
 import lombok.experimental.UtilityClass;
+import org.cloudburstmc.protocol.bedrock.codec.LoginLimits;
 import org.cloudburstmc.protocol.bedrock.data.auth.PlayerAuthenticationType;
 import org.cloudburstmc.protocol.bedrock.packet.LoginPacket;
 import org.jose4j.json.JsonUtil;
@@ -212,6 +213,7 @@ public class EncryptionUtils {
     }
 
     public static byte[] verifyClientData(String clientDataJwt, PublicKey identityPublicKey) throws JoseException {
+        LoginLimits.checkJwtHeader(clientDataJwt);
         JsonWebSignature clientData = new JsonWebSignature();
         clientData.setCompactSerialization(clientDataJwt);
         clientData.setKey(identityPublicKey);

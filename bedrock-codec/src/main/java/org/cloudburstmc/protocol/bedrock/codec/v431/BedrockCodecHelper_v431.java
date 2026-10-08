@@ -309,7 +309,8 @@ public class BedrockCodecHelper_v431 extends BedrockCodecHelper_v428 {
     protected ItemStackRequestAction readRequestActionData(ByteBuf byteBuf, ItemStackRequestActionType type) {
         if (type == ItemStackRequestActionType.CRAFT_RESULTS) {
             return new CraftResultsDeprecatedAction(
-                    this.readArray(byteBuf, new ItemData[0], this::readItemInstance),
+                    this.readArray(byteBuf, new ItemData[0], this::readItemInstance,
+                            this.getEncodingSettings().maxCraftResults()),
                     null,
                     byteBuf.readUnsignedByte()
             );

@@ -27,6 +27,7 @@ public class EncodingSettings {
             .maxSkinImageWidth(4096)
             .maxSkinImageHeight(4096)
             .maxSkinImageBytesLength(67108864)
+            .maxCraftResults(16) // vanilla recipes have at most 2
             .build();
 
     /**
@@ -47,6 +48,7 @@ public class EncodingSettings {
             .maxSkinImageWidth(4096)
             .maxSkinImageHeight(4096)
             .maxSkinImageBytesLength(67108864)
+            .maxCraftResults(16)
             .build();
 
     /**
@@ -67,6 +69,7 @@ public class EncodingSettings {
             .maxSkinImageWidth(4096)
             .maxSkinImageHeight(4096)
             .maxSkinImageBytesLength(67108864)
+            .maxCraftResults(16)
             .build();
 
     /**
@@ -88,6 +91,7 @@ public class EncodingSettings {
             .maxSkinImageWidth(-1)
             .maxSkinImageHeight(-1)
             .maxSkinImageBytesLength(-1)
+            .maxCraftResults(-1)
             .build();
 
     private final int maxListSize;
@@ -102,4 +106,5 @@ public class EncodingSettings {
     private final int maxSkinImageWidth;
     private final int maxSkinImageHeight;
     private final int maxSkinImageBytesLength;
+    private final int maxCraftResults;
 }

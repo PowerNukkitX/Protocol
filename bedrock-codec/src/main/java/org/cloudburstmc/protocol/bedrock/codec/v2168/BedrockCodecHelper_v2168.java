@@ -998,7 +998,8 @@ public class BedrockCodecHelper_v2168 extends BedrockCodecHelper_v1001 {
 
     protected CraftResultsDeprecatedAction readItemStackRequestCraftResultsDeprecatedAction(ByteBuf buffer) {
         final List<ItemStackRequestNetworkItemInstanceDescriptor> craftResults = new ObjectArrayList<>();
-        this.readArray(buffer, craftResults, this::readItemStackRequestNetworkItemInstanceDescriptor);
+        this.readArray(buffer, craftResults, this::readItemStackRequestNetworkItemInstanceDescriptor,
+                this.getEncodingSettings().maxCraftResults());
         final int numCrafts = buffer.readUnsignedByte();
         return new CraftResultsDeprecatedAction(null, craftResults, numCrafts);
     }

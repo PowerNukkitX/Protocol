@@ -25,7 +25,7 @@ public class CommandRequestSerializer_v898 extends CommandRequestSerializer_v567
 
     @Override
     public void deserialize(ByteBuf buffer, BedrockCodecHelper helper, CommandRequestPacket packet) {
-        packet.setCommand(helper.readStringMaxLen(buffer, 512));
+        packet.setCommand(helper.readStringMaxLen(buffer, 1000));
         packet.setCommandOrigin(helper.readCommandOrigin(buffer));
         packet.setInternal(buffer.readBoolean());
         packet.setVersion(CurrentCmdVersion.from(helper.readString(buffer)));

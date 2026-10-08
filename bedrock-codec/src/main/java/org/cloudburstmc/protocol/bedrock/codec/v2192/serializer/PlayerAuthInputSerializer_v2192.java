@@ -62,8 +62,7 @@ public class PlayerAuthInputSerializer_v2192 extends PlayerAuthInputSerializer_v
         packet.setMoveVector(helper.readVector2f(buffer));
         final float playerHeadRotation = buffer.readFloatLE();
         packet.setPlayerRotation(Vector3f.from(playerRotation.getX(), playerRotation.getY(), playerHeadRotation));
-        helper.readArray(buffer, packet.getInputData(),
-                (buf, codecHelper) -> PlayerAuthInputData.from(VarInts.readInt(buf)));
+        this.readInputData(buffer, helper, packet);
         packet.setInputMode(InputMode.from(VarInts.readUnsignedInt(buffer)));
         packet.setPlayMode(ClientPlayMode.from(VarInts.readUnsignedInt(buffer)));
         packet.setNewInteractionModel(InputInteractionModel.from(VarInts.readInt(buffer)));

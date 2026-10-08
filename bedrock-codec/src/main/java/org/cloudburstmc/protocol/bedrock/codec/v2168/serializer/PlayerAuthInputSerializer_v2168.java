@@ -21,6 +21,8 @@ import org.cloudburstmc.protocol.common.util.VarInts;
 public class PlayerAuthInputSerializer_v2168 extends PlayerAuthInputSerializer_v1001 {
     public static final PlayerAuthInputSerializer_v2168 INSTANCE = new PlayerAuthInputSerializer_v2168();
 
+    protected static final int MAX_INPUT_DATA = PlayerAuthInputData.values().length;
+
     @Override
     public void serialize(ByteBuf buffer, BedrockCodecHelper helper, PlayerAuthInputPacket packet) {
         buffer.writeFloatLE(packet.getPlayerRotation().getX());
@@ -64,8 +66,7 @@ public class PlayerAuthInputSerializer_v2168 extends PlayerAuthInputSerializer_v
         final float playerHeadRotation = buffer.readFloatLE();
         packet.setPlayerRotation(Vector3f.from(playerRotation.getX(), playerRotation.getY(), playerHeadRotation));
         if (buffer.readBoolean()) {
-            helper.readArray(buffer, packet.getInputData(),
-                    (buf, codecHelper) -> PlayerAuthInputData.from(VarInts.readInt(buf)));
+            this.readInputData(buffer, helper, packet);
         }
         packet.setInputMode(InputMode.from(VarInts.readUnsignedInt(buffer)));
         packet.setPlayMode(ClientPlayMode.from(VarInts.readUnsignedInt(buffer)));
@@ -143,5 +144,14 @@ public class PlayerAuthInputSerializer_v2168 extends PlayerAuthInputSerializer_v
         }
         transaction.setTransaction(helper.readItemUseInventoryTransaction(buffer));
         return transaction;
+    }
+
+    /**
+     * Reads the input flag list. A client can't hold more flags than exist, so anything past that is junk
+     * and gets rejected before we loop over it.
+     */
+    protected void readInputData(ByteBuf buffer, BedrockCodecHelper helper, PlayerAuthInputPacket packet) {
+        helper.readArray(buffer, packet.getInputData(),
+                (buf, codecHelper) -> PlayerAuthInputData.from(VarInts.readInt(buf)), MAX_INPUT_DATA);
     }
 }

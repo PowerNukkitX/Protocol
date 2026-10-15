@@ -26,5 +26,9 @@ public enum ItemStackRequestActionType {
     /**
      * @deprecated since 712
      */
-    TAKE_FROM_ITEM_CONTAINER
+    TAKE_FROM_ITEM_CONTAINER,
+    /**
+     * @since v2225
+     */
+    CRAFT_RESERVED
 }

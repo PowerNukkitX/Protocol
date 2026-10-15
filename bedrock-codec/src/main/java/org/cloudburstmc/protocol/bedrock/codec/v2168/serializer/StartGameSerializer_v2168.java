@@ -90,6 +90,7 @@ public class StartGameSerializer_v2168 extends StartGameSerializer_v1001 {
         VarInts.writeInt(buffer, settings.getEditorWorldType().ordinal());
         buffer.writeBoolean(settings.isCreatedInEditor());
         buffer.writeBoolean(settings.isExportedFromEditor());
+        this.writeEditorLevelMigrationVersion(buffer, settings);
         VarInts.writeInt(buffer, settings.getDayCycleStopTime());
         VarInts.writeUnsignedInt(buffer, settings.getEducationEditionOffer().ordinal());
         buffer.writeBoolean(settings.isEducationFeaturesEnabled());
@@ -146,6 +147,7 @@ public class StartGameSerializer_v2168 extends StartGameSerializer_v1001 {
         settings.setEditorWorldType(EditorWorldType.from(VarInts.readInt(buffer)));
         settings.setCreatedInEditor(buffer.readBoolean());
         settings.setExportedFromEditor(buffer.readBoolean());
+        this.readEditorLevelMigrationVersion(buffer, settings);
         settings.setDayCycleStopTime(VarInts.readInt(buffer));
         settings.setEducationEditionOffer(EducationEditionOffer.from(VarInts.readUnsignedInt(buffer)));
         settings.setEducationFeaturesEnabled(buffer.readBoolean());
@@ -201,6 +203,13 @@ public class StartGameSerializer_v2168 extends StartGameSerializer_v1001 {
     @Override
     protected void readBeforeNetworkPermissions(ByteBuf buffer, BedrockCodecHelper helper, StartGamePacket packet) {
         packet.setNetworkPermissions(this.readNetworkPermissions(buffer, helper));
+    }
+
+    // no-op until v2225, which slots the migration version in right after the editor flags
+    protected void writeEditorLevelMigrationVersion(ByteBuf buffer, LevelSettings settings) {
+    }
+
+    protected void readEditorLevelMigrationVersion(ByteBuf buffer, LevelSettings settings) {
     }
 
     private void writeServerBlockProperty(ByteBuf buffer, BedrockCodecHelper helper, ServerBlockProperty property) {

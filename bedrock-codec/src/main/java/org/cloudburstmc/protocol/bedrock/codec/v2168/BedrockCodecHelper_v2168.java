@@ -52,7 +52,7 @@ import static org.cloudburstmc.protocol.common.util.Preconditions.checkNotNull;
  */
 public class BedrockCodecHelper_v2168 extends BedrockCodecHelper_v1001 {
 
-    protected final TypeMap<ItemStackRequestActionType> legacyItemStackRequestActionTypeMap = TypeMap.builder(ItemStackRequestActionType.class)
+    protected TypeMap<ItemStackRequestActionType> legacyItemStackRequestActionTypeMap = TypeMap.builder(ItemStackRequestActionType.class)
             .insert(0, ItemStackRequestActionType.TAKE)
             .insert(1, ItemStackRequestActionType.PLACE)
             .insert(2, ItemStackRequestActionType.SWAP)

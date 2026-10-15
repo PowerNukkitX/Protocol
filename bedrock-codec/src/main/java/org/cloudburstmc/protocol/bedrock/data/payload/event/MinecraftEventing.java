@@ -99,7 +99,11 @@ public final class MinecraftEventing {
         GETTING_AN_UPGRADE(123),
         MONSTER_HUNTER(124),
         DIAMONDS(125),
-        PLETHORA_OF_CATS(126);
+        PLETHORA_OF_CATS(126),
+        /**
+         * @since v2225
+         */
+        WHAT_GOES_AROUND_COMES_AROUND(127);
 
         private final int id;
 

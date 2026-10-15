@@ -22,31 +22,42 @@ public class ClientboundUpdateSoundDataPacket implements BedrockPacket {
      */
     private SoundDataEvent soundEvent;
     /**
+     * @since v2225
+     */
+    private SoundData event;
+    /**
      * @since v2168
+     * @deprecated since v2225, use {@link #event}
      */
     private SoundData stop;
     /**
      * @since v2168
+     * @deprecated since v2225, use {@link #event}
      */
     private SoundData setVolume;
     /**
      * @since v2168
+     * @deprecated since v2225, use {@link #event}
      */
     private SoundData setPitch;
     /**
      * @since v2168
+     * @deprecated since v2225, use {@link #event}
      */
     private SoundData fade;
     /**
      * @since v2168
+     * @deprecated since v2225, use {@link #event}
      */
     private SoundData seekTo;
     /**
      * @since v2168
+     * @deprecated since v2225, use {@link #event}
      */
     private SoundData pause;
     /**
      * @since v2168
+     * @deprecated since v2225, use {@link #event}
      */
     private SoundData resume;
 

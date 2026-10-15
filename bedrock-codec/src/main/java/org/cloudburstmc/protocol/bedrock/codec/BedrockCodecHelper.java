@@ -30,6 +30,7 @@ import org.cloudburstmc.protocol.bedrock.data.payload.experiment.ExperimentToggl
 import org.cloudburstmc.protocol.bedrock.data.payload.experiment.Experiments;
 import org.cloudburstmc.protocol.bedrock.data.payload.inventory.transaction.InventoryTransaction;
 import org.cloudburstmc.protocol.bedrock.data.payload.inventory.transaction.data.ItemUseInventoryTransaction;
+import org.cloudburstmc.protocol.bedrock.data.payload.passenger.PassengerOfBlockArguments;
 import org.cloudburstmc.protocol.bedrock.data.payload.skin.SerializedSkin;
 import org.cloudburstmc.protocol.bedrock.data.payload.structure.StructureSettings;
 import org.cloudburstmc.protocol.bedrock.data.skin.Skin;
@@ -264,6 +265,10 @@ public interface BedrockCodecHelper {
     void writeServerSoundHandle(ByteBuf buffer, ServerSoundHandle serverSoundHandle);
 
     ServerSoundHandle readServerSoundHandle(ByteBuf buffer);
+
+    void writePassengerOfBlockArguments(ByteBuf buffer, PassengerOfBlockArguments arguments);
+
+    PassengerOfBlockArguments readPassengerOfBlockArguments(ByteBuf buffer);
 
     void writeGatheringsConfigurationJoinInfo(ByteBuf buffer, GatheringsConfigurationJoinInfo config);
 

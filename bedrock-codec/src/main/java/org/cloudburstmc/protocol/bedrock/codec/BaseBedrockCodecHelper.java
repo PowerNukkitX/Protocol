@@ -39,6 +39,7 @@ import org.cloudburstmc.protocol.bedrock.data.payload.experiment.ExperimentToggl
 import org.cloudburstmc.protocol.bedrock.data.payload.experiment.Experiments;
 import org.cloudburstmc.protocol.bedrock.data.payload.inventory.transaction.*;
 import org.cloudburstmc.protocol.bedrock.data.payload.inventory.transaction.data.ItemUseInventoryTransaction;
+import org.cloudburstmc.protocol.bedrock.data.payload.passenger.PassengerOfBlockArguments;
 import org.cloudburstmc.protocol.bedrock.data.payload.skin.SerializedSkin;
 import org.cloudburstmc.protocol.bedrock.data.payload.structure.StructureSettings;
 import org.cloudburstmc.protocol.bedrock.data.skin.AnimationData;
@@ -624,6 +625,16 @@ public abstract class BaseBedrockCodecHelper implements BedrockCodecHelper {
 
     @Override
     public ServerSoundHandle readServerSoundHandle(ByteBuf buffer) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void writePassengerOfBlockArguments(ByteBuf buffer, PassengerOfBlockArguments arguments) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public PassengerOfBlockArguments readPassengerOfBlockArguments(ByteBuf buffer) {
         throw new UnsupportedOperationException();
     }
 

@@ -3,6 +3,7 @@ package org.cloudburstmc.protocol.bedrock.data;
 import lombok.Data;
 import lombok.ToString;
 import org.cloudburstmc.math.vector.Vector3i;
+import org.cloudburstmc.protocol.bedrock.data.payload.editor.EditorLevelMigrationVersion;
 import org.cloudburstmc.protocol.bedrock.data.payload.editor.ServerEditorConnectionPolicy;
 import org.cloudburstmc.protocol.bedrock.data.payload.experiment.Experiments;
 import org.cloudburstmc.protocol.common.util.OptionalBoolean;
@@ -37,6 +38,10 @@ public class LevelSettings {
      * @since v582
      */
     private boolean isExportedFromEditor;
+    /**
+     * @since v2225
+     */
+    private EditorLevelMigrationVersion editorLevelMigrationVersion = EditorLevelMigrationVersion.LEGACY;
     private int dayCycleStopTime;
     private EducationEditionOffer educationEditionOffer;
     private boolean educationFeaturesEnabled;

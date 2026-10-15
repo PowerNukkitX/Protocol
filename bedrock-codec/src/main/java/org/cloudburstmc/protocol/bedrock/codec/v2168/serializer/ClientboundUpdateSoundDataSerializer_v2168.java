@@ -42,6 +42,10 @@ public class ClientboundUpdateSoundDataSerializer_v2168 extends ClientboundUpdat
 
     protected void writeSoundData(ByteBuf buffer, BedrockCodecHelper helper, SoundData soundData) {
         VarInts.writeUnsignedInt(buffer, soundData.getType().ordinal());
+        this.writeSoundDataBody(buffer, soundData);
+    }
+
+    protected void writeSoundDataBody(ByteBuf buffer, SoundData soundData) {
         switch (soundData.getType()) {
             case SET_VOLUME:
                 buffer.writeFloatLE(((SetVolume) soundData).getVolume());
@@ -61,7 +65,10 @@ public class ClientboundUpdateSoundDataSerializer_v2168 extends ClientboundUpdat
     }
 
     protected SoundData readSoundData(ByteBuf buffer, BedrockCodecHelper helper) {
-        final SoundDataEvent event = SoundDataEvent.from(VarInts.readUnsignedInt(buffer));
+        return this.readSoundDataBody(buffer, SoundDataEvent.from(VarInts.readUnsignedInt(buffer)));
+    }
+
+    protected SoundData readSoundDataBody(ByteBuf buffer, SoundDataEvent event) {
         switch (event) {
             case STOP:
                 return new Stop();

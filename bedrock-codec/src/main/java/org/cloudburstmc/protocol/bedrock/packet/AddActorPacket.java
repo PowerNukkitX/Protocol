@@ -10,6 +10,7 @@ import org.cloudburstmc.protocol.bedrock.data.payload.attribute.AttributeData;
 import org.cloudburstmc.protocol.bedrock.data.actor.ActorDataMap;
 import org.cloudburstmc.protocol.bedrock.data.actor.ActorLink;
 import org.cloudburstmc.protocol.bedrock.data.actor.PropertySyncData;
+import org.cloudburstmc.protocol.bedrock.data.payload.passenger.PassengerOfBlockArguments;
 import org.cloudburstmc.protocol.common.PacketSignal;
 
 import java.util.List;
@@ -40,6 +41,10 @@ public class AddActorPacket implements BedrockPacket {
      * @since v557
      */
     private final PropertySyncData syncedProperties = new PropertySyncData();
+    /**
+     * @since v2225
+     */
+    private PassengerOfBlockArguments passengerOfBlockData;
 
     @Override
     public final PacketSignal handle(BedrockPacketHandler handler) {

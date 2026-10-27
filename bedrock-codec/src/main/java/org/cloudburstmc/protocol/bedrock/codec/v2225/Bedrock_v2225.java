@@ -11,6 +11,7 @@ import org.cloudburstmc.protocol.bedrock.codec.v2225.serializer.ClientboundPlayA
 import org.cloudburstmc.protocol.bedrock.codec.v2225.serializer.ClientboundUpdateSoundDataSerializer_v2225;
 import org.cloudburstmc.protocol.bedrock.codec.v2225.serializer.LevelChunkSerializer_v2225;
 import org.cloudburstmc.protocol.bedrock.codec.v2225.serializer.ServerboundCursorItemDragSerializer_v2225;
+import org.cloudburstmc.protocol.bedrock.codec.v2225.serializer.ServerboundDiagnosticsSerializer_v2225;
 import org.cloudburstmc.protocol.bedrock.codec.v2225.serializer.ServerboundRegisterAudioContentSerializer_v2225;
 import org.cloudburstmc.protocol.bedrock.codec.v2225.serializer.SetPassengerOfBlockSerializer_v2225;
 import org.cloudburstmc.protocol.bedrock.codec.v2225.serializer.StartGameSerializer_v2225;
@@ -33,6 +34,7 @@ import org.cloudburstmc.protocol.bedrock.packet.LevelEventGenericPacket;
 import org.cloudburstmc.protocol.bedrock.packet.LevelEventPacket;
 import org.cloudburstmc.protocol.bedrock.packet.LevelSoundEventPacket;
 import org.cloudburstmc.protocol.bedrock.packet.ServerboundCursorItemDragPacket;
+import org.cloudburstmc.protocol.bedrock.packet.ServerboundDiagnosticsPacket;
 import org.cloudburstmc.protocol.bedrock.packet.ServerboundRegisterAudioContentPacket;
 import org.cloudburstmc.protocol.bedrock.packet.SetPassengerOfBlockPacket;
 import org.cloudburstmc.protocol.bedrock.packet.StartGamePacket;
@@ -83,6 +85,7 @@ public class Bedrock_v2225 extends Bedrock_v2207 {
             .updateSerializer(LevelEventPacket.class, new LevelEventSerializer_v291(LEVEL_EVENTS))
             .updateSerializer(LevelEventGenericPacket.class, new LevelEventGenericSerializer_v361(LEVEL_EVENTS))
             .updateSerializer(LevelSoundEventPacket.class, new LevelSoundEventSerializer_v1001(SOUND_EVENTS))
+            .updateSerializer(ServerboundDiagnosticsPacket.class, new ServerboundDiagnosticsSerializer_v2225(MEMORY_CATEGORY_TYPES))
             .updateSerializer(StartGamePacket.class, StartGameSerializer_v2225.INSTANCE)
             .registerPacket(SetPassengerOfBlockPacket::new, SetPassengerOfBlockSerializer_v2225.INSTANCE, 357, PacketRecipient.BOTH)
             .registerPacket(ServerboundCursorItemDragPacket::new, ServerboundCursorItemDragSerializer_v2225.INSTANCE, 358, PacketRecipient.SERVER)

@@ -1,0 +1,53 @@
+name: Bug Report
+description: A packet is read or written wrong, or something else is broken
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    attributes:
+      label: Describe the bug
+      description: What goes wrong? Include the exception and stack trace if there is one.
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Packet
+      description: The packet or data type involved, if you know it. (e.g. PlayerAuthInputPacket)
+
+  - type: input
+    attributes:
+      label: Minecraft version and codec
+      description: The client version and the codec in use. (e.g. 1.26.60, Bedrock_v2225)
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Protocol version
+      description: The library version or commit you are on. (e.g. 3.0.0.Beta8-SNAPSHOT or 847a39a)
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: To Reproduce
+      description: Steps to reproduce the behavior.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Expected behavior
+      description: What should have happened instead? If you know the correct wire format, link the source (Mojang's protocol docs, a packet capture, etc).
+
+  - type: textarea
+    attributes:
+      label: Packet dump
+      description: A hex dump of the packet, if you have one.
+      render: text
+
+  - type: textarea
+    attributes:
+      label: Additional context
+      description: Anything else that helps, such as the server software using this library.

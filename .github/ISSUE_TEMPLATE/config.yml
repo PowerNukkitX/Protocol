@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: PowerNukkitX server issues
+    url: https://github.com/PowerNukkitX/PowerNukkitX/issues
+    about: Bugs in the server itself rather than in the protocol library go here.
+  - name: Discord
+    url: https://discord.gg/apwd7uauZg
+    about: Questions and general help.

@@ -1,5 +1,5 @@
 [versions]
-checkerframework = "3.37.0"
+checkerframework = "4.4.0"
 netty = "4.2.20.Final"
 jackson = "2.22"
 

@@ -1,7 +1,7 @@
 [versions]
 checkerframework = "3.37.0"
 netty = "4.2.20.Final"
-jackson = "2.22"
+jackson = "2.23"
 
 [libraries]
 checker-qual = { group = "org.checkerframework", name = "checker-qual", version.ref = "checkerframework" }

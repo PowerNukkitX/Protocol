@@ -13,6 +13,12 @@ public class DataStoreUpdate extends DataStoreChangeInfo {
     private String dataStoreName;
     private String property;
     private String path;
+    /**
+     * Replaces {@link #dataStoreName}, {@link #property} and {@link #path} on the wire.
+     *
+     * @since v2259
+     */
+    private String variableName;
     private DataStorePropertyType type;
     private Object data;
     private int propertyUpdateCount;

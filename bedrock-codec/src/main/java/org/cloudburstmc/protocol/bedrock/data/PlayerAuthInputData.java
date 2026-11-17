@@ -158,6 +158,13 @@ public enum PlayerAuthInputData {
      */
     INTERNAL_UPDATE;
 
+    /**
+     * hmm, v2259 reuses bit 65 for the offhand swap, so this just points at the same constant
+     *
+     * @since v2259
+     */
+    public static final PlayerAuthInputData SWAP_OFFHAND = INTERNAL_UPDATE;
+
     private static final PlayerAuthInputData[] VALUES = values();
 
     public static PlayerAuthInputData from(int ordinal) {

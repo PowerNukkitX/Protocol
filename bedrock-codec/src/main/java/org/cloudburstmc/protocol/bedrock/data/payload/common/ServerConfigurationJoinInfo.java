@@ -2,6 +2,7 @@ package org.cloudburstmc.protocol.bedrock.data.payload.common;
 
 import lombok.Data;
 import org.cloudburstmc.protocol.bedrock.data.payload.configuration.ClientStoreEntryPointConfiguration;
+import org.cloudburstmc.protocol.bedrock.data.payload.configuration.ManagedChatConfiguration;
 import org.cloudburstmc.protocol.bedrock.data.payload.configuration.PresenceConfiguration;
 
 /**
@@ -13,4 +14,8 @@ public class ServerConfigurationJoinInfo {
     private GatheringsConfigurationJoinInfo gatheringsConfig;
     private ClientStoreEntryPointConfiguration storeEntryPointInfo;
     private PresenceConfiguration presenceConfiguration;
+    /**
+     * @since v2259
+     */
+    private ManagedChatConfiguration managedChatConfiguration;
 }

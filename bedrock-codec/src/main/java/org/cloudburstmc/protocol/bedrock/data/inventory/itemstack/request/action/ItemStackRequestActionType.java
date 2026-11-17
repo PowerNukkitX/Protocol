@@ -30,5 +30,9 @@ public enum ItemStackRequestActionType {
     /**
      * @since v2225
      */
-    CRAFT_RESERVED
+    CRAFT_RESERVED,
+    /**
+     * @since v2259
+     */
+    CRAFT_DISC_PRESS
 }

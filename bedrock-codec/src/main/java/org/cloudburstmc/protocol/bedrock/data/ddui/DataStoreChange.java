@@ -12,6 +12,12 @@ public class DataStoreChange extends DataStoreChangeInfo {
 
     private String dataStoreName;
     private String property;
+    /**
+     * Replaces {@link #dataStoreName} and {@link #property} on the wire.
+     *
+     * @since v2259
+     */
+    private String variableName;
     private int updateCount;
     private DynamicValue theNewPropertyValue;
 

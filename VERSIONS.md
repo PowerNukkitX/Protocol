@@ -71,3 +71,4 @@ This library supports multiple versions of the Bedrock protocol. Below is a list
 | Bedrock_v2192 |      1.26.50       |
 | Bedrock_v2207 | 1.26.60 (beta 21)  |
 | Bedrock_v2225 |      1.26.60       |
+| Bedrock_v2259 |      1.26.70       |

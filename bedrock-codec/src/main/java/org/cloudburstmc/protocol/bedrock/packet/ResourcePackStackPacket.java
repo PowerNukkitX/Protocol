@@ -5,10 +5,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cloudburstmc.protocol.bedrock.data.payload.experiment.Experiments;
+import org.cloudburstmc.protocol.bedrock.data.payload.pack.EditorPackType;
 import org.cloudburstmc.protocol.bedrock.data.payload.pack.PackInstanceId;
 import org.cloudburstmc.protocol.common.PacketSignal;
 
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @EqualsAndHashCode(doNotUseGetters = true)
@@ -26,6 +29,12 @@ public class ResourcePackStackPacket implements BedrockPacket {
      * @since v671
      */
     private boolean includeEditorPacks;
+    /**
+     * Replaces {@link #includeEditorPacks} on the wire.
+     *
+     * @since v2259
+     */
+    private final Set<EditorPackType> editorPackTypes = EnumSet.noneOf(EditorPackType.class);
 
 
     @Override

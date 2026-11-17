@@ -7,7 +7,11 @@ public enum AttributeDataType {
 
     BOOL,
     FLOAT,
-    COLOR;
+    COLOR,
+    /**
+     * @since v2259
+     */
+    STRING;
 
     private static final AttributeDataType[] VALUES = values();
 

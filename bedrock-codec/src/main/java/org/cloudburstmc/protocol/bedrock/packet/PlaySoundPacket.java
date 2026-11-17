@@ -31,6 +31,17 @@ public class PlaySoundPacket implements BedrockPacket {
      * @since v2192
      */
     private Float playbackPositionSeconds;
+    /**
+     * Null starts playback once the audio is ready, otherwise the timeline starts after this delay
+     * and audio that shows up late seeks forward to catch up.
+     *
+     * @since v2259
+     */
+    private Float startDelaySeconds;
+    /**
+     * @since v2259
+     */
+    private Long attachToActorRuntimeId;
 
     @Override
     public final PacketSignal handle(BedrockPacketHandler handler) {

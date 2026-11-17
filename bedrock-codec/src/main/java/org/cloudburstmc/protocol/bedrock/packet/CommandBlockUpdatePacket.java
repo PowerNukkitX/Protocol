@@ -28,6 +28,10 @@ public class CommandBlockUpdatePacket implements BedrockPacket {
      * @since v361
      */
     private boolean executeOnFirstTick;
+    /**
+     * @since v2259
+     */
+    private boolean lastOutputRawMessage;
 
     @Override
     public final PacketSignal handle(BedrockPacketHandler handler) {

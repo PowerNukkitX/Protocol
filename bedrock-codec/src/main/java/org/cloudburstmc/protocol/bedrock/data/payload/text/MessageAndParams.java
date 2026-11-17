@@ -16,6 +16,12 @@ public class MessageAndParams implements TextPacketBody {
 
     private String message;
     private final List<String> parameterList = new ObjectArrayList<>();
+    /**
+     * Only jukebox popups really care, true waits behind the current popup instead of clearing the queue.
+     *
+     * @since v2259
+     */
+    private boolean queue;
 
     @Override
     public TextPacketBodyType getType() {

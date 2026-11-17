@@ -84,7 +84,7 @@ codec helper starts with `EncodingSettings.DEFAULT`. A server usually wants the 
 client the looser `EncodingSettings.CLIENT`. `setCodec` creates a fresh helper, so apply them after it:
 
 ```java
-session.setCodec(Bedrock_v2225.CODEC);
+session.setCodec(Bedrock_v2259.CODEC);
 session.getPeer().getCodecHelper().setEncodingSettings(EncodingSettings.SERVER);
 ```
 

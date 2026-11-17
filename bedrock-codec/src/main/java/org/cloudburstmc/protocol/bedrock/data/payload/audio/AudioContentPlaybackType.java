@@ -11,7 +11,11 @@ import lombok.RequiredArgsConstructor;
 public enum AudioContentPlaybackType {
 
     MUSIC("Music"),
-    SOUND("Sound");
+    SOUND("Sound"),
+    /**
+     * @since v2259
+     */
+    CONCURRENT_MUSIC("ConcurrentMusic");
 
     private final String id;
 

@@ -253,5 +253,41 @@ public enum DisconnectFailReason {
     /**
      * @since v2225
      */
-    SUB_CLIENT_LOGIN_NOT_BOUND
+    SUB_CLIENT_LOGIN_NOT_BOUND,
+    /**
+     * @since v2259
+     */
+    SESSION_RUNTIME_ERROR,
+    /**
+     * @since v2259
+     */
+    SESSION_INVALID_RESPONSE,
+    /**
+     * @since v2259
+     */
+    SESSION_NETWORK_ERROR,
+    /**
+     * @since v2259
+     */
+    SESSION_SERVICE_ERROR,
+    /**
+     * @since v2259
+     */
+    SESSION_SERVICE_UNAVAILABLE,
+    /**
+     * @since v2259
+     */
+    SESSION_THROTTLED,
+    /**
+     * @since v2259
+     */
+    SESSION_REQUEST_REJECTED,
+    /**
+     * @since v2259
+     */
+    SESSION_UNKNOWN_ERROR,
+    /**
+     * @since v2259
+     */
+    BROKEN_DATA
 }

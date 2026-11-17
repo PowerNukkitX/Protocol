@@ -589,6 +589,30 @@ public enum SoundEvent {
      * @since v2225
      */
     ICE_BALL_BREAK("ice_ball.break"),
+    /**
+     * @since v2259
+     */
+    CONVERT_TO_FROSTBITE("convert_to_frostbite"),
+    /**
+     * @since v2259
+     */
+    CONVERT_TO_ZOMBIE("convert_to_zombie"),
+    /**
+     * @since v2259
+     */
+    CRACK("crack"),
+    /**
+     * @since v2259
+     */
+    ICE_BALL_THROW("ice_ball.throw"),
+    /**
+     * @since v2259
+     */
+    RECORD_FLURRY("record.flurry"),
+    /**
+     * @since v2259
+     */
+    IMITATE_FROSTBITE("imitate.frostbite"),
     UNDEFINED("undefined");
 
     private final String id;

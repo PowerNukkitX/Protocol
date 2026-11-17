@@ -5,6 +5,10 @@ public enum InputMode {
     MOUSE,
     TOUCH,
     GAME_PAD,
+    /**
+     * @since v2259
+     */
+    GAME_PAD_AND_MOUSE,
     COUNT;
 
     private static final InputMode[] VALUES = values();

@@ -58,7 +58,17 @@ public enum ContainerType {
     /**
      * @since v2225
      */
-    RESERVED_CONTAINER_TYPE(38);
+    DISC_PRESS(38),
+    /**
+     * @since v2259
+     */
+    VIRTUAL_CONTAINER(39);
+
+    /**
+     * @deprecated v2225 shipped the disc press under a placeholder name, use {@link #DISC_PRESS}
+     */
+    @Deprecated
+    public static final ContainerType RESERVED_CONTAINER_TYPE = DISC_PRESS;
 
     public static final ContainerType[] VALUES;
 

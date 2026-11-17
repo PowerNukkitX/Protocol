@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cloudburstmc.protocol.bedrock.annotation.Incompressible;
 import org.cloudburstmc.protocol.bedrock.data.PacketCompressionAlgorithm;
+import org.cloudburstmc.protocol.bedrock.data.SctpRecoveryProfile;
 import org.cloudburstmc.protocol.common.PacketSignal;
 
 @Data
@@ -37,6 +38,10 @@ public class NetworkSettingsPacket implements BedrockPacket {
      * @since v554
      */
     private float clientThrottleScalar;
+    /**
+     * @since v2259
+     */
+    private SctpRecoveryProfile sctpRecoveryProfile = SctpRecoveryProfile.DEFAULT;
 
     @Override
     public PacketSignal handle(BedrockPacketHandler handler) {

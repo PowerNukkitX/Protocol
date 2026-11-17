@@ -100,5 +100,25 @@ public enum ContainerEnumName {
     /**
      * @since v2225
      */
-    RESERVED_CONTAINER_D
+    RESERVED_CONTAINER_D,
+    /**
+     * @since v2259
+     */
+    DISC_PRESS_BLOCK,
+    /**
+     * @since v2259
+     */
+    DISC_PRESS_DYE,
+    /**
+     * @since v2259
+     */
+    DISC_PRESS_DISC,
+    /**
+     * @since v2259
+     */
+    DISC_PRESS_RESULT_PREVIEW,
+    /**
+     * @since v2259
+     */
+    VIRTUAL_CONTAINER
 }

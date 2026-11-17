@@ -97,6 +97,13 @@ public enum PlayerActionType {
      */
     INTERNAL_UPDATE;
 
+    /**
+     * hmm, v2259 reuses id 38 for the offhand swap, so this just points at the same constant
+     *
+     * @since v2259
+     */
+    public static final PlayerActionType SWAP_OFFHAND = INTERNAL_UPDATE;
+
     private static final PlayerActionType[] VALUES = values();
 
     public static PlayerActionType from(int ordinal) {
